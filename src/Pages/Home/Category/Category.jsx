@@ -7,12 +7,17 @@ import image2 from "../../../assets/home/slide2.jpg";
 import image3 from "../../../assets/home/slide3.jpg";
 import image4 from "../../../assets/home/slide4.jpg";
 import image5 from "../../../assets/home/slide5.jpg";
+import HeadTitle from "../../../Utility/Shared/HeadTitle ";
 
 // import "styles.css";
 
 const Category = () => {
   return (
     <div className="max-w-[1140px] px-5 mx-auto">
+      <HeadTitle
+        titleMain={"ORDER ONLINE"}
+        titleHead={"From 11:00am to 10:00pm"}
+      />
       <Swiper
         slidesPerView={1}
         spaceBetween={10}

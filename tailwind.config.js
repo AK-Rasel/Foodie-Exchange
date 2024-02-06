@@ -11,6 +11,9 @@ export default {
         poppins: ['"Poppins"', "sans-serif"],
         cinzel: ['"Cinzel"', "serif"],
       },
+      colors: {
+        "custom-yellow": "#D99904",
+      },
     },
   },
   plugins: [require("daisyui"), require("preline/plugin")],

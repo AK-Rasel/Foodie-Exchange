@@ -13,6 +13,7 @@ export default {
       },
       colors: {
         "custom-yellow": "#D99904",
+        "custom-naveBlue": "#111827",
       },
     },
   },

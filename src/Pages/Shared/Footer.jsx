@@ -22,7 +22,7 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <section className="text-center bg-[#151515] p-3">
+      <section className="text-center text-white bg-[#151515] p-3">
         <p className="font-poppins">
           Copyright <span>{currentYear}</span> © CulinaryCloud. All rights
           reserved.

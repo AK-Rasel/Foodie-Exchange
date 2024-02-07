@@ -14,6 +14,7 @@ export default {
       colors: {
         "custom-yellow": "#D99904",
         "custom-naveBlue": "#111827",
+        "custom-naveBlueLow": "#1F2937",
       },
     },
   },

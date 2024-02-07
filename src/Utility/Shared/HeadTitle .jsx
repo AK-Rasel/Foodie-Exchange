@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 const HeadTitle = ({ titleHead, titleMain }) => {
   return (
     <div className="font-poppins text-center space-y-3 my-6">
-      <p className="font-poppins leading-3  text-custom-yellow">
+      <p className="font-poppins text-lg font-semibold text-custom-yellow leading-3  ">
         --{titleHead}--
       </p>
       <div className="divider w-80 mx-auto"></div>

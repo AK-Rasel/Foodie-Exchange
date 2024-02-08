@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 const SmallCard = ({ foodImg, foodName, foodPrice, foodRecipe }) => {
   return (
     <div className="font-cinzel text-white space-y-1 flex gap-3 items-center">
@@ -11,7 +12,7 @@ const SmallCard = ({ foodImg, foodName, foodPrice, foodRecipe }) => {
           <div className="flex items-center ">
             <p className="flex-1">{foodName} -------------------</p>
           </div>
-          <span>{parseFloat(foodPrice)}</span>
+          <span>{"$" + parseFloat(foodPrice)}</span>
         </div>
         <div>
           <div className="grid grid-cols-4">
@@ -23,5 +24,10 @@ const SmallCard = ({ foodImg, foodName, foodPrice, foodRecipe }) => {
     </div>
   );
 };
-
+SmallCard.propTypes = {
+  foodImg: PropTypes.string,
+  foodName: PropTypes.string,
+  foodPrice: PropTypes.number,
+  foodRecipe: PropTypes.string,
+};
 export default SmallCard;

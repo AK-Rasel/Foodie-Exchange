@@ -25,9 +25,8 @@ const Navbar = () => {
         Dashboard
       </Link>
       <Link
-        to="/"
+        to="/our_menu "
         className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
-        href="#"
       >
         Our Menu
       </Link>

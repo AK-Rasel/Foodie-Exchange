@@ -18,7 +18,7 @@ const Testimonial = () => {
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
-  console.log(reviews);
+  // console.log(reviews);
   return (
     <section>
       <HeadTitle
@@ -27,7 +27,7 @@ const Testimonial = () => {
       />
       <div>
         <Swiper
-          Autoplay
+          autoplay={true}
           navigation={true}
           modules={[Navigation]}
           className="mySwiper"

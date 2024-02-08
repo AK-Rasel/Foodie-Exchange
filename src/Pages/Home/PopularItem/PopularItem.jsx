@@ -16,7 +16,7 @@ const PopularItem = () => {
         setPopular(populars);
       });
   }, []);
-  console.log(popular);
+  // console.log(popular);
 
   return (
     <section>

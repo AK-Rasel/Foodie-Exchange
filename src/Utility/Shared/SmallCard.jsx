@@ -1,17 +1,23 @@
-const SmallCard = () => {
+const SmallCard = ({ foodImg, foodName, foodPrice, foodRecipe }) => {
   return (
-    <div className="font-cinzel text-white space-y-1 ">
-      <div className="flex justify-between font-semibold text-xl">
-        <p>ROAST DUCK BREAST ------------------</p>
-        <span>$14.5</span>
-      </div>
+    <div className="font-cinzel text-white space-y-1 flex gap-3 items-center">
+      <img
+        className="w-20 h-20 object-cover rounded-lg border-2 border-white"
+        src={foodImg}
+        alt=""
+      />
       <div>
-        <div className="grid grid-cols-4">
-          <p className="col-span-3 leading-5 ">
-            Roasted duck breast (served pink) with gratin potato and a griottine
-            cherry sauce
-          </p>
-          <span className="col-span-1">{""}</span>
+        <div className="flex justify-between font-semibold text-xl">
+          <div className="flex items-center ">
+            <p className="flex-1">{foodName} -------------------</p>
+          </div>
+          <span>{parseFloat(foodPrice)}</span>
+        </div>
+        <div>
+          <div className="grid grid-cols-4">
+            <p className="col-span-3 leading-5 ">{foodRecipe}</p>
+            <span className="col-span-1">{""}</span>
+          </div>
         </div>
       </div>
     </div>

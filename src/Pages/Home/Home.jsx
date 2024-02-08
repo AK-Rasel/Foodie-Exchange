@@ -7,6 +7,7 @@ import ChefRecommendation from "./Chef's Recommendation/ChefRecommendation";
 import Feature from "./Feature/Feature";
 import OurPromise from "./OurPromise";
 import PopularItem from "./PopularItem/PopularItem";
+import Testimonial from "./Testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -20,6 +21,9 @@ const Home = () => {
         <ChefRecommendation />
       </Container>
       <Feature />
+      <Container>
+        <Testimonial />
+      </Container>
     </>
   );
 };

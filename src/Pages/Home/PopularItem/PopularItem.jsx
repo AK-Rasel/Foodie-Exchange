@@ -1,22 +1,26 @@
-import { useState } from "react";
 import HeadTitle from "../../../Utility/Shared/HeadTitle ";
 import SmallCard from "../../../Utility/Shared/SmallCard";
 // import categoryImg from "../../assets/home/slide1.jpg";
-import { useEffect } from "react";
-// import backgroundImage from "../../../assets/home/background.jpg";
+
+import useMenu from "../../../Hooks/useMenu";
+
 const PopularItem = () => {
-  const [popular, setPopular] = useState([]);
-  useEffect(() => {
-    fetch("menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const populars = data.filter(
-          (popularItem) => popularItem.category === "popular"
-        );
-        setPopular(populars);
-      });
-  }, []);
+  const [menu] = useMenu();
+  // const [popular, setPopular] = useState([]);
+  // useEffect(() => {
+  //   fetch("menu.json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const populars = data.filter(
+  //         (popularItem) => popularItem.category === "popular"
+  //       );
+  //       setPopular(populars);
+  //     });
+  // }, []);
   // console.log(popular);
+  const popular = menu.filter(
+    (popularItems) => popularItems.category === "popular"
+  );
 
   return (
     <section>

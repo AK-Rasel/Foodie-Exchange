@@ -31,7 +31,7 @@ const Navbar = () => {
         Our Menu
       </Link>
       <Link
-        to="/"
+        to="/our_shop/salad"
         className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
         href="#"
       >

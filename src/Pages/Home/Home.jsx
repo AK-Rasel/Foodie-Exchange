@@ -9,7 +9,7 @@ import Feature from "./Feature/Feature";
 import OurPromise from "./OurPromise";
 import PopularItem from "./PopularItem/PopularItem";
 import Testimonial from "./Testimonial/Testimonial";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 const Home = () => {
   return (

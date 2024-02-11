@@ -18,7 +18,7 @@ const SectionCover = ({
       <div className="hero-overlay w-[200] mx-auto bg-opacity-60"></div>
       {/* <div className="hero-content text-center text-neutral-content"> */}
       <div className="text-center bg-black bg-opacity-50 lg:min-w-[900px] md:max-w-[600px] max-w-[350px] p-20 text-white">
-        <h1 className="mb-5 md:text-5xl lg:text-7xl text-3xl font-bold font-cinzel">
+        <h1 className="mb-5 md:text-5xl lg:text-7xl text-3xl font-bold font-cinzel uppercase">
           {mainTitale}
         </h1>
         <p className="mb-5">{titaleParagrup}</p>

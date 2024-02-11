@@ -54,6 +54,7 @@ const PopularItem = () => {
                 foodPrice={item.price}
                 foodRecipe={item.recipe}
                 foodImg={item.image}
+                textWhite="text-white"
               />
             ))}
           </div>

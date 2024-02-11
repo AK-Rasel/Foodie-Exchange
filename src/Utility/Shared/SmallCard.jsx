@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
-const SmallCard = ({ foodImg, foodName, foodPrice, foodRecipe }) => {
+const SmallCard = ({ foodImg, foodName, foodPrice, foodRecipe, textWhite }) => {
   return (
-    <div className="font-cinzel text-white space-y-1 flex gap-3 items-center">
+    <div
+      className={`font-cinzel ${textWhite} space-y-1 flex gap-3 items-center`}
+    >
       <img
         className="w-20 h-20 object-cover rounded-lg border-2 border-white"
         src={foodImg}
@@ -29,5 +31,6 @@ SmallCard.propTypes = {
   foodName: PropTypes.string,
   foodPrice: PropTypes.number,
   foodRecipe: PropTypes.string,
+  textWhite: PropTypes.string,
 };
 export default SmallCard;

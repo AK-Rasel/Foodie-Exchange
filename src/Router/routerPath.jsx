@@ -4,11 +4,14 @@ import Home from "../Pages/Home/Home";
 import OurMenu from "../Pages/OurMenu/OurMenu";
 import OurShop from "../Pages/OurShop/OurShop";
 import ContactUs from "../Pages/ContactUs/ContactUs";
+import Error from "../Pages/Error/Error";
+import Login from "../Pages/Login/Login";
 
 const routerPath = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -27,6 +30,10 @@ const routerPath = createBrowserRouter([
         element: <ContactUs />,
       },
     ],
+  },
+  {
+    path: "login",
+    element: <Login />,
   },
 ]);
 export default routerPath;

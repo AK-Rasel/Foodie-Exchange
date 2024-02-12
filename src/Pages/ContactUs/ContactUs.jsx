@@ -6,7 +6,10 @@ import SectionCover from "../../Utility/Shared/SectionCover";
 import banner4 from "../../assets/contact/banner.jpg";
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaClock, FaPaperPlane } from "react-icons/fa";
+import ContactInfo from "./ContactInfo";
+import { FaLocationDot } from "react-icons/fa6";
+import { FaPhoneAlt } from "react-icons/fa";
 const ContactUs = () => {
   const [value, setValue] = useState();
   const [name, setName] = useState("");
@@ -37,12 +40,35 @@ const ContactUs = () => {
         bannerImage={banner4}
         titaleParagrup={"Would you like to try a dish?"}
       />
+
       <Container>
+        <HeadTitle titleHead={"Visit Us"} titleMain={"OUR LOCATION"} />
+        {/* contact info */}
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-16 ">
+          {/* phone */}
+          <ContactInfo
+            subInfo="+38 (012) 34 56 789"
+            infoIcon={<FaPhoneAlt />}
+            infoTagline="Phone"
+          />
+          {/* ADDRESS */}
+          <ContactInfo
+            subInfo="+38 (012) 34 56 789"
+            infoIcon={<FaLocationDot />}
+            infoTagline="ADDRESS"
+          />
+          {/* WORKING HOURS */}
+          <ContactInfo
+            subInfo="Mon - Fri: 08:00 - 22:00"
+            subInfo2="Sat - Sun: 10:00 - 23:00"
+            infoIcon={<FaClock />}
+            infoTagline="WORKING HOURS"
+          />
+        </div>
         {/* input */}
         <HeadTitle titleHead={"Send Us a Message"} titleMain={"CONTACT FORM"} />
 
         {/* day */}
-
         <div className="card rounded-lg shrink-0 w-full  shadow-2xl bg-[#fafafa] mb-20">
           <form
             onSubmit={contactHandle}
@@ -83,10 +109,11 @@ const ContactUs = () => {
                 <span className="label-text">Phone</span>
               </label>
               <PhoneInput
+                country="auto"
+                // defaultCountry="BD"
                 international
                 countryCallingCodeEditable={false}
-                defaultCountry="BD"
-                placeholder="Enter Your Email"
+                placeholder="Enter Your Phone Number"
                 className="input input-bordered "
                 value={value}
                 onChange={setValue}

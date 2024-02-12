@@ -5,19 +5,29 @@ import HeadTitle from "../../Utility/Shared/HeadTitle ";
 import SectionCover from "../../Utility/Shared/SectionCover";
 import banner4 from "../../assets/contact/banner.jpg";
 import { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { FaPaperPlane } from "react-icons/fa";
 const ContactUs = () => {
   const [value, setValue] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [verify, setVerify] = useState(false);
+
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setVerify(true);
+  }
   const contactHandle = (e) => {
     e.preventDefault();
-    // console.log("phone ==>", value);
-    // console.log("name ==>", name);
-    // console.log("email ==>", email);
-    // console.log("message ==>", message);
 
-    const contactFrom = { value, name, email, message };
+    console.log("phone ==>", value);
+    console.log("name ==>", name);
+    console.log("email ==>", email);
+    console.log("message ==>", message);
+    console.log("Captcha value:", e);
+    document.getElementById("contact_reset").reset();
+    // const contactFrom = { value, name, email, message };
   };
   return (
     <section>
@@ -33,8 +43,12 @@ const ContactUs = () => {
 
         {/* day */}
 
-        <div className="card shrink-0 w-full  shadow-2xl bg-[#f3f3f3] mb-20">
-          <form onSubmit={contactHandle} className="card-body">
+        <div className="card rounded-lg shrink-0 w-full  shadow-2xl bg-[#fafafa] mb-20">
+          <form
+            onSubmit={contactHandle}
+            className="card-body "
+            id="contact_reset"
+          >
             <div className="flex justify-between gap-10">
               {/* name */}
               <div className="form-control flex-1">
@@ -73,7 +87,7 @@ const ContactUs = () => {
                 countryCallingCodeEditable={false}
                 defaultCountry="BD"
                 placeholder="Enter Your Email"
-                className="input input-bordered"
+                className="input input-bordered "
                 value={value}
                 onChange={setValue}
                 required
@@ -92,10 +106,22 @@ const ContactUs = () => {
                 required
               />
             </div>
-
-            <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">
-                Login
+            {/* google captcha 😈😈😈 */}
+            <ReCAPTCHA
+              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              onChange={onChange}
+              className="my-10"
+            />
+            <div className="form-control mt-6 justify-center mx-auto">
+              <button
+                type="submit"
+                disabled={!verify}
+                className=" bg-custom-yellow w-40 justify-center items-center gap-2 p-3 text-white font-semibold disabled:opacity-50 flex"
+              >
+                Send Message
+                <span>
+                  <FaPaperPlane />
+                </span>
               </button>
             </div>
           </form>

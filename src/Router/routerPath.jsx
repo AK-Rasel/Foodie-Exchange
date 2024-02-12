@@ -6,6 +6,7 @@ import OurShop from "../Pages/OurShop/OurShop";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import Error from "../Pages/Error/Error";
 import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
 
 const routerPath = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const routerPath = createBrowserRouter([
   {
     path: "login",
     element: <Login />,
+  },
+  {
+    path: "register",
+    element: <Register />,
   },
 ]);
 export default routerPath;

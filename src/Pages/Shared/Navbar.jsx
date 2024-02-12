@@ -11,9 +11,8 @@ const Navbar = () => {
         Home
       </Link>
       <Link
-        to="/"
+        to="/contact_us"
         className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
-        href="#"
       >
         Contact Us
       </Link>

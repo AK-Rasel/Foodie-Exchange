@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 // import image from "../../assets/home/Rectangle 5.jpg";
 const Cards = ({ items }) => {
-  const { name, recipe, image, price, category } = items;
+  const { name, recipe, image, price } = items;
   return (
     <div className="group: w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
       {/* img */}
       <img className="rounded-t-lg " src={image} alt="product image" />
       <p className="text-white bg-black p-4 w-16 absolute top-4 right-4 z-10  rounded-lg font-poppins">
-        {price}
+        {"$" + price}
       </p>
       {/* content */}
       <div className="px-5 pb-6 mt-4 space-y-6">
@@ -16,7 +16,7 @@ const Cards = ({ items }) => {
           <h4 className="text-3xl text-center  font-bold tracking-tight  text-gray-900 dark:text-white">
             {name}
           </h4>
-          <p className="text-white">{category}</p>
+          {/* <p className="text-white">{category}</p> */}
 
           <h5 className="text-xl text-center tracking-tight text-gray-900 dark:text-white">
             {recipe}

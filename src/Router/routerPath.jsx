@@ -30,15 +30,15 @@ const routerPath = createBrowserRouter([
         path: "contact_us",
         element: <ContactUs />,
       },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
     ],
-  },
-  {
-    path: "login",
-    element: <Login />,
-  },
-  {
-    path: "register",
-    element: <Register />,
   },
 ]);
 export default routerPath;

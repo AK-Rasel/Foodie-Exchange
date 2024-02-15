@@ -87,7 +87,12 @@ const Cards = ({ items }) => {
   );
 };
 Cards.propTypes = {
-  items: PropTypes.node,
+  items: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    recipe: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Cards;

@@ -1,20 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../../Utility/Container";
 import background from "../../assets/others/AuthBacground.png";
 import loginImage from "../../assets/others/LoginImg.png";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+// import { useState } from "react";
 import { RiErrorWarningFill } from "react-icons/ri";
+import useAuthContext from "../../Hooks/useAuthContext";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
 
 const Register = () => {
   // const [conformPasswordError, setConformPasswordError] = useState();
+  const { createUser, updateUser } = useAuthContext();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset,
     watch,
+
     formState: { errors },
   } = useForm();
+  const [viewPassword, setViewPassword] = useState("password");
+  const [viewConfirm, setViewConfirm] = useState("password");
+
+  const togglePasswordVisibility = (e, setState) => {
+    e.preventDefault();
+    setState((prevState) => (prevState === "password" ? "text" : "password"));
+  };
   const onSubmit = (data) => {
     // if (data.password === data.conformPassword) {
     //   console.log(data.email, data.name, data.password, data.gender);
@@ -23,6 +38,22 @@ const Register = () => {
     //   setConformPasswordError("conformPassword not mach");
     // }
     console.log(data.email, data.name, data.password);
+    const email = data.email;
+    const password = data.password;
+    const name = data.name;
+    createUser(email, password)
+      .then((res) => {
+        updateUser(name);
+        console.log(res.user);
+        toast.success("Successfully Register");
+
+        reset();
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error(err.message);
+      });
   };
   return (
     <div
@@ -65,6 +96,16 @@ const Register = () => {
                     }
                     {...register("name", {
                       required: " Enter a Name*",
+
+                      minLength: {
+                        value: 3,
+                        message: "minimum Length 3 letter",
+                      },
+
+                      maxLength: {
+                        value: 10,
+                        message: "maximum Length 10 letter",
+                      },
                     })}
                   />
                   <p className="font-poppins text-red-500 text-xs mt-3 flex gap-1">
@@ -97,9 +138,6 @@ const Register = () => {
                         ? "input input-bordered "
                         : "input input-bordered input-error"
                     }
-                    {...register("name", {
-                      required: " Enter a Name*",
-                    })}
                     {...register("email", { required: "Enter an  email" })}
                   />
                   <p className="font-poppins text-red-500 text-xs mt-3 flex gap-1">
@@ -112,20 +150,43 @@ const Register = () => {
                     {errors.email?.message}
                   </p>
                 </div>
-                <div className="form-control">
+                {/* new password */}
+                <div className="form-control relative">
                   <label className="label">
                     <span className="label-text">New Password</span>
                   </label>
                   <input
-                    type="password"
+                    type={viewPassword}
                     placeholder="new password"
                     className={
                       !errors.password?.message
                         ? "input input-bordered "
                         : "input input-bordered input-error"
                     }
-                    {...register("password", { required: "Enter a Password" })}
+                    {...register("password", {
+                      required: "Enter a Password",
+                      pattern:
+                        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+                    })}
                   />
+                  {/* Visibility button ============================*/}
+                  <div className="absolute z-10 top-1/2 right-[5%] cursor-pointer">
+                    {viewPassword === "password" ? (
+                      <RxEyeOpen
+                        onClick={(e) =>
+                          togglePasswordVisibility(e, setViewPassword)
+                        }
+                      />
+                    ) : (
+                      <RxEyeClosed
+                        className="text-red-500"
+                        onClick={(e) =>
+                          togglePasswordVisibility(e, setViewPassword)
+                        }
+                      />
+                    )}
+                  </div>
+
                   <p className="font-poppins text-red-500 text-xs mt-3 flex gap-1">
                     {" "}
                     {errors.password?.message ? (
@@ -134,14 +195,21 @@ const Register = () => {
                       ""
                     )}
                     {errors.password?.message}
+                    {errors?.password?.type === "pattern" && (
+                      <p>
+                        Password must have min 9 letter password, with at least
+                        a symbol, upper and lower case letters and a number
+                      </p>
+                    )}
                   </p>
                 </div>
-                <div className="form-control">
+                {/* confirm Password */}
+                <div className="form-control relative">
                   <label className="label">
                     <span className="label-text">Confirm Password</span>
                   </label>
                   <input
-                    type="password"
+                    type={viewConfirm}
                     placeholder="confirm password"
                     className={
                       !errors.conformPassword?.message
@@ -149,12 +217,30 @@ const Register = () => {
                         : "input input-bordered input-error"
                     }
                     {...register("conformPassword", {
-                      required: "Enter a Conform  Password",
+                      required: "Enter a Conform  Password is required",
+                      validate: (data) => {
+                        if (watch("password") !== data) {
+                          return "password not match";
+                        }
+                      },
                     })}
                   />
-                  {/* <label className="label">
-                    <span className="label-text">{conformPasswordError}</span>
-                  </label> */}
+                  <div className="absolute z-10 top-1/2 right-[5%] cursor-pointer">
+                    {viewConfirm === "password" ? (
+                      <RxEyeOpen
+                        onClick={(e) =>
+                          togglePasswordVisibility(e, setViewConfirm)
+                        }
+                      />
+                    ) : (
+                      <RxEyeClosed
+                        className="text-red-500"
+                        onClick={(e) =>
+                          togglePasswordVisibility(e, setViewConfirm)
+                        }
+                      />
+                    )}
+                  </div>
                   <p className="font-poppins text-red-500 text-xs mt-3 flex gap-1">
                     {" "}
                     {errors.conformPassword?.message ? (
@@ -174,24 +260,22 @@ const Register = () => {
                     {...register("gender", {
                       required: "Please select your gender",
                     })}
-                    // className="select select-bordered w-full max-w-xs"
                     className={
-                      !errors.gender?.message
-                        ? "select select-bordered w-full max-w-xs "
-                        : "select select-bordered w-full max-w-xs input-error"
+                      !errors.gender
+                        ? "select select-bordered w-full max-w-xs"
+                        : "select select-bordered w-full max-w-xs border-red-500"
                     }
-                    defaultValue="Select Gender"
+                    defaultValue=""
                   >
-                    <option disabled>Select Gender</option>
+                    <option value="" disabled>
+                      Select Gender
+                    </option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
-                  <p className="font-poppins text-red-500 text-xs mt-3 flex gap-1">
-                    {" "}
-                    {errors.gender?.message ? (
+                  <p className="font-poppins text-red-500 text-xs mt-3 flex gap-1 ">
+                    {errors.gender?.message && (
                       <RiErrorWarningFill className="text-base" />
-                    ) : (
-                      ""
                     )}
                     {errors.gender?.message}
                   </p>

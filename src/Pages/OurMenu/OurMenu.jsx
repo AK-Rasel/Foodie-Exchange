@@ -8,6 +8,7 @@ import pizzaImage from "../../assets/menu/pizza-bg.jpg";
 import saladsImage from "../../assets/menu/salad-bg.jpg";
 import soupsImage from "../../assets/menu/soup-bg.jpg";
 import drinksImage from "../../assets/menu/banner3.jpg";
+import { useEffect } from "react";
 
 const OurMenu = () => {
   const [menu] = useMenu();
@@ -17,6 +18,10 @@ const OurMenu = () => {
   const salads = menu.filter((salad) => salad.category === "salad");
   const soups = menu.filter((soup) => soup.category === "soup");
   const drinks = menu.filter((drink) => drink.category === "soup");
+  useEffect(() => {
+    scroll(0, 0);
+  }, []);
+
   return (
     <section>
       <Helmet>

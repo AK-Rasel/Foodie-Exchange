@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Container from "../../Utility/Container";
 import background from "../../assets/others/AuthBacground.png";
 import loginImage from "../../assets/others/LoginImg.png";
@@ -14,6 +14,8 @@ const Login = () => {
   const { login } = useAuthContext();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -32,8 +34,8 @@ const Login = () => {
     login(email, password)
       .then(() => {
         // console.log(res.user);
-        navigate("/");
         toast.success("Successfully Login");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err.message);
@@ -136,6 +138,7 @@ const Login = () => {
                     {errors.password?.message}
                   </p>
                   <label className="label">
+                    {/* to do */}
                     <a href="#" className="label-text-alt link link-hover">
                       Forgot password?
                     </a>

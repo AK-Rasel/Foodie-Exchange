@@ -4,7 +4,6 @@ import background from "../../assets/others/AuthBacground.png";
 import loginImage from "../../assets/others/LoginImg.png";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-// import { useState } from "react";
 import { RiErrorWarningFill } from "react-icons/ri";
 import useAuthContext from "../../Hooks/useAuthContext";
 import toast from "react-hot-toast";
@@ -12,7 +11,6 @@ import { useState } from "react";
 import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
 
 const Register = () => {
-  // const [conformPasswordError, setConformPasswordError] = useState();
   const { createUser, updateUser } = useAuthContext();
   const navigate = useNavigate();
   const {
@@ -52,7 +50,13 @@ const Register = () => {
       })
       .catch((err) => {
         console.log(err.message);
-        toast.error(err.message);
+        if (err.code === "auth/email-already-in-use") {
+          toast.error(
+            "Email is already in use. Please choose a different email."
+          );
+        } else {
+          toast.error(err.message);
+        }
       });
   };
   return (

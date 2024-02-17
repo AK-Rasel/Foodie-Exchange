@@ -7,7 +7,7 @@ import Container from "../../Utility/Container";
 import useMenu from "../../Hooks/useMenu";
 import TabCategory from "../../Utility/Shared/TabCategory";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const OurShop = () => {
   const [menu] = useMenu();
@@ -20,9 +20,11 @@ const OurShop = () => {
   const categories = ["salad", "pizza", "soup", "dessert", "drink"];
   const { category } = useParams();
   const initialIndex = categories.indexOf(category);
-  console.log(category);
+  // console.log(category);
   const [tabIndex, setTabIndex] = useState(initialIndex);
-
+  useEffect(() => {
+    scroll(0, 0);
+  }, []);
   return (
     <section>
       <div>

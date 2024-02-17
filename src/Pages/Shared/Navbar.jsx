@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuthContext from "../../Hooks/useAuthContext";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Navbar = () => {
   const { user, logOut } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const menuRef = useRef();
 
   const logoutHandel = () => {
     logOut();
@@ -15,6 +16,19 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleClickOutside = (e) => {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const NavOption = (
     <>
@@ -69,7 +83,7 @@ const Navbar = () => {
           Log in
         </Link>
       ) : (
-        <button onClick={toggleMenu}>
+        <button onClick={toggleMenu} className="flex ">
           <img
             className=" w-8 h-8 flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             type="button"
@@ -82,7 +96,7 @@ const Navbar = () => {
   );
 
   return (
-    <header className="fixed transition delay-[0.6s]  bg-opacity-50 text-white flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  text-sm py-3 sm:py-0 bg-gray-800 dark:border-gray-700">
+    <header className="fixed transition delay-[0.6s] backdrop-blur-md  bg-opacity-50 text-white flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  text-sm py-3 sm:py-0 bg-gray-800 dark:border-gray-700">
       <nav
         className="relative text-white max-w-7xl w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
         aria-label="Global"
@@ -135,14 +149,16 @@ const Navbar = () => {
           <div className="flex text-white  flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
             {NavOption}
             {user && isOpen && (
-              <div className="absolute border border-custom-yellow top-12 right-8 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 text-custom-naveBlue">
+              <div
+                ref={menuRef}
+                className="absolute border border-custom-yellow top-12 right-8 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 text-custom-naveBlue"
+              >
                 <div className="px-4 py-3  text-sm text-gray-900">
                   <div className="uppercase  font-poppins">
                     {user?.displayName}
                   </div>
                   <div className="font-medium truncate">{user?.email}</div>
                 </div>
-                {/* <div className="divider border border-custom-yellow py-0 my-0"></div> */}
                 <hr className=" border-custom-yellow border-t-2 w-full" />
                 <ul
                   className="py-2 text-sm text-gray-700 a"
@@ -157,21 +173,17 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to="/settings"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Settings
-                    </Link>
+                    <button className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      Cart
+                      <div className="badge ">+0</div>
+                    </button>
                   </li>
-
                   <Link
                     to="/earnings"
                     className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
                     Earnings
                   </Link>
-
                   <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                     <button onClick={logoutHandel}>Sign out</button>
                   </li>

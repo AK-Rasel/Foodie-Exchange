@@ -4,7 +4,7 @@ import Container from "../../Utility/Container";
 import HeadTitle from "../../Utility/Shared/HeadTitle ";
 import SectionCover from "../../Utility/Shared/SectionCover";
 import banner4 from "../../assets/contact/banner.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { FaClock, FaPaperPlane } from "react-icons/fa";
 import ContactInfo from "./ContactInfo";
@@ -32,6 +32,9 @@ const ContactUs = () => {
     document.getElementById("contact_reset").reset();
     // const contactFrom = { value, name, email, message };
   };
+  useEffect(() => {
+    scroll(0, 0);
+  }, []);
   return (
     <section>
       <SectionCover

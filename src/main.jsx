@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Toaster position="bottom-left" reverseOrder={false} />
+    <Toaster position="left" reverseOrder={false} />
     <AuthProvider>
       <HelmetProvider>
         <RouterProvider router={routerPath}></RouterProvider>

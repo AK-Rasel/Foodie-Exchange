@@ -1,8 +1,59 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAuthContext from "../../Hooks/useAuthContext";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosProtect from "../../Hooks/useAxiosProtect";
+
 // import image from "../../assets/home/Rectangle 5.jpg";
+
 const Cards = ({ items }) => {
-  const { name, recipe, image, price } = items;
+  const { name, recipe, image, price, _id } = items;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAuthContext();
+  const axiosProtected = useAxiosProtect();
+  const addCartHandle = (food) => {
+    // console.log(user?.email, food);
+    const cartItems = {
+      name,
+      image,
+      price,
+      menuId: _id,
+      email: user?.email,
+    };
+
+    // console.log("cartItem ====>", cartItems);
+    if (user) {
+      // toodo
+      axiosProtected.post("/cart", cartItems).then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Success fully add cart ${name}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "Login Please",
+        text: "Login now to add to cart",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#D99904",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // naviget
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
+
   return (
     <div className="group: w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
       {/* img */}
@@ -78,9 +129,12 @@ const Cards = ({ items }) => {
           {/* <span className="text-3xl font-bold text-gray-900 dark:text-white">
             $599
           </span> */}
-          <Link className="text-white bg-custom-yellow focus:ring-4 focus:outline-none font-medium rounded-lg text-lg px-5 py-2.5 text-center ">
+          <button
+            onClick={() => addCartHandle(items)}
+            className="text-white bg-custom-yellow focus:ring-4 focus:outline-none font-medium rounded-lg text-lg px-5 py-2.5 text-center "
+          >
             Add to cart
-          </Link>
+          </button>
         </div>
       </div>
     </div>

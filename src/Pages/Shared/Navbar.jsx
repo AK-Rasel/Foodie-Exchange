@@ -1,12 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuthContext from "../../Hooks/useAuthContext";
 import { useState, useEffect, useRef } from "react";
+import useCarts from "../../Hooks/useCarts";
 
 const Navbar = () => {
   const { user, logOut } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef();
+  const [cart] = useCarts();
+  // console.log(cart);
 
   const logoutHandel = () => {
     logOut();
@@ -172,11 +175,11 @@ const Navbar = () => {
                       Dashboard
                     </Link>
                   </li>
-                  <li>
-                    <button className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                      Cart
-                      <div className="badge ">+0</div>
-                    </button>
+                  <li className="px-4 group cursor-pointer  flex py-2 relative hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    Cart
+                    <div className=" ml-3 absolute top-1 group-hover:text-white text-custom-naveBlueLow  font-poppins font-medium  right-[52%]   py-1 px-3 rounded-xl  z-10">
+                      {"+" + cart?.length}
+                    </div>
                   </li>
                   <Link
                     to="/earnings"

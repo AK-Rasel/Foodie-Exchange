@@ -9,7 +9,7 @@ import useCarts from "../../Hooks/useCarts";
 
 const Cards = ({ items }) => {
   const [, refetch] = useCarts();
-  const { name, recipe, image, price, _id } = items;
+  const { name, recipe, image, price, _id, category } = items;
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuthContext();
@@ -22,6 +22,7 @@ const Cards = ({ items }) => {
       price,
       menuId: _id,
       email: user?.email,
+      category,
     };
 
     // console.log("cartItem ====>", cartItems);
@@ -99,6 +100,7 @@ Cards.propTypes = {
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     _id: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
   }).isRequired,
 };
 

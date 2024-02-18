@@ -285,12 +285,16 @@
 // three
 import { useState } from "react";
 import useCarts from "../../../Hooks/useCarts";
+import Swal from "sweetalert2";
+import useAxiosProtect from "../../../Hooks/useAxiosProtect";
 
 const Cart = () => {
-  const [cart] = useCarts();
+  const [cart, refetch] = useCarts();
+  const axios = useAxiosProtect();
   const sum = cart.reduce((acc, cart) => {
     return acc + cart.price;
   }, 0);
+
   const itemSumPrice = sum.toFixed(2);
 
   const [checkBook1, setCheckBook1] = useState(false);
@@ -318,14 +322,61 @@ const Cart = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const selectedItems = cart.filter((item) => selectedIds.includes(item._id));
-
-    console.log("Selected _ids:", selectedItems);
+    // console.log(selectedIds);
+    const id = selectedIds;
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .post("/delete_items", id)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
   };
 
-  const singelHendel = (e) => {
-    console.log(e);
-  };
+  //   const singelHendel = (id) => {
+  //     Swal.fire({
+  //       title: "Are you sure?",
+  //       text: "You won't be able to revert this!",
+  //       icon: "warning",
+  //       showCancelButton: true,
+  //       confirmButtonColor: "#3085d6",
+  //       cancelButtonColor: "#d33",
+  //       confirmButtonText: "Yes, delete it!",
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         axios.delete(`/cart/${id}`).then((res) => {
+  //           if (res.data.deletedCount) {
+  //             refetch();
+  //             Swal.fire({
+  //               title: "Deleted!",
+  //               text: "Your file has been deleted.",
+  //               icon: "success",
+  //             });
+  //           }
+  //         });
+  //       }
+  //     });
+  //   };
 
   return (
     <section>
@@ -343,12 +394,16 @@ const Cart = () => {
       </div>
       <form onSubmit={handleFormSubmit}>
         <div className="my-5">
-          <button
-            type="submit"
-            className="text-lg hover:underline text-red-500 bg-none font-medium text-center"
-          >
-            Select Remove
-          </button>
+          {selectedIds.length ? (
+            <button
+              type="submit"
+              className="text-lg disabled:text-custom-yellow hover:underline text-red-500 bg-none font-medium text-center"
+            >
+              Select Remove
+            </button>
+          ) : (
+            ""
+          )}
         </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -421,10 +476,10 @@ const Cart = () => {
                   <td className="px-6 py-4">ToDo</td>
                   <td className="flex items-center px-6 py-4">
                     <button
-                      onClick={() => singelHendel(item?._id)}
+                      //   onClick={() => singelHendel(item._id)}
                       className="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"
                     >
-                      Remove
+                      View
                     </button>
                   </td>
                 </tr>

@@ -8,6 +8,9 @@ import Error from "../Pages/Error/Error";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRouter from "./PrivateRouter";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import Cart from "../Pages/Dashboard/Cart/Cart";
+import Review from "../Pages/Dashboard/Review/Review";
 
 const routerPath = createBrowserRouter([
   {
@@ -16,7 +19,7 @@ const routerPath = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home />,
       },
       {
@@ -42,6 +45,20 @@ const routerPath = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "reviews",
+        element: <Review />,
       },
     ],
   },

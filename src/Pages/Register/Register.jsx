@@ -9,9 +9,11 @@ import useAuthContext from "../../Hooks/useAuthContext";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
+import useAxiosOpen from "../../Hooks/useAxiosOpen";
 
 const Register = () => {
-  const { createUser, updateUser } = useAuthContext();
+  const axios = useAxiosOpen();
+  const { createUser, updateUser, logOut } = useAuthContext();
   const navigate = useNavigate();
   const {
     register,
@@ -39,14 +41,34 @@ const Register = () => {
     const email = data.email;
     const password = data.password;
     const name = data.name;
+    const gender = data.gender;
     createUser(email, password)
-      .then((res) => {
+      .then(() => {
         updateUser(name);
-        console.log(res.user);
-        toast.success("Successfully Register");
+        const userInfo = {
+          name: name,
+          email: email,
+          gender: gender,
+        };
+        axios
+          .post("/user", userInfo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+              toast.success("Successfully Register");
 
-        reset();
-        navigate("/");
+              reset();
+              navigate("/");
+            }
+          })
+          .catch((err) => {
+            // console.log(err.message);
+
+            if (err.message === "Request failed with status code 404") {
+              logOut();
+              toast.error(err.message);
+            }
+          });
       })
       .catch((err) => {
         console.log(err.message);

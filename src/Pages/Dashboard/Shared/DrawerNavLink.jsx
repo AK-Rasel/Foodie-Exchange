@@ -4,7 +4,9 @@ const DrawerNavLink = () => {
   return (
     <>
       <div>
-        <h1 className="text-3xl mb-5 font-bold">FoodExchange</h1>
+        <Link to="/" className="text-3xl mb-5 font-bold">
+          FoodExchange
+        </Link>
       </div>
       {/* horizontal line */}
       <hr className="w-full border border-white  my-4" />

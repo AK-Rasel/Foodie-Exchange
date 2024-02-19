@@ -99,7 +99,7 @@ Cards.propTypes = {
     recipe: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    _id: PropTypes.number.isRequired,
+    _id: PropTypes.string,
     category: PropTypes.string.isRequired,
   }).isRequired,
 };

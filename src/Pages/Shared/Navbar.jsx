@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import useCarts from "../../Hooks/useCarts";
 
 const Navbar = () => {
+  const admin = true;
+  // const admin=false
   const { user, logOut } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -48,12 +50,21 @@ const Navbar = () => {
       >
         Contact Us
       </Link>
-      <Link
-        to="/dashboard"
-        className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
-      >
-        Dashboard
-      </Link>
+      {admin ? (
+        <Link
+          to="dashboard/admin_home"
+          className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
+        >
+          Dashboard
+        </Link>
+      ) : (
+        <Link
+          to="dashboard/user_home"
+          className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
+        >
+          Dashboard
+        </Link>
+      )}
       <Link
         to="/our_menu"
         className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
@@ -169,7 +180,7 @@ const Navbar = () => {
                 >
                   <li>
                     <Link
-                      to="/dashboard"
+                      to="/dashboard/user_home"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Dashboard

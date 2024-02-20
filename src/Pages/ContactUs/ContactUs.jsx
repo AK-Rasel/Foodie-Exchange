@@ -1,15 +1,16 @@
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import Container from "../../Utility/Container";
+
 import HeadTitle from "../../Utility/Shared/HeadTitle ";
+
 import SectionCover from "../../Utility/Shared/SectionCover";
 import banner4 from "../../assets/contact/banner.jpg";
 import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { FaClock, FaPaperPlane } from "react-icons/fa";
-import ContactInfo from "./ContactInfo";
-import { FaLocationDot } from "react-icons/fa6";
-import { FaPhoneAlt } from "react-icons/fa";
+import ContactInformation from "../Reservation/ContactInformation";
+import { FaPaperPlane } from "react-icons/fa";
+
 const ContactUs = () => {
   const [value, setValue] = useState();
   const [name, setName] = useState("");
@@ -47,27 +48,8 @@ const ContactUs = () => {
       <Container>
         <HeadTitle titleHead={"Visit Us"} titleMain={"OUR LOCATION"} />
         {/* contact info */}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-16 ">
-          {/* phone */}
-          <ContactInfo
-            subInfo="+38 (012) 34 56 789"
-            infoIcon={<FaPhoneAlt />}
-            infoTagline="Phone"
-          />
-          {/* ADDRESS */}
-          <ContactInfo
-            subInfo="+38 (012) 34 56 789"
-            infoIcon={<FaLocationDot />}
-            infoTagline="ADDRESS"
-          />
-          {/* WORKING HOURS */}
-          <ContactInfo
-            subInfo="Mon - Fri: 08:00 - 22:00"
-            subInfo2="Sat - Sun: 10:00 - 23:00"
-            infoIcon={<FaClock />}
-            infoTagline="WORKING HOURS"
-          />
-        </div>
+        <ContactInformation />
+
         {/* input */}
         <HeadTitle titleHead={"Send Us a Message"} titleMain={"CONTACT FORM"} />
 

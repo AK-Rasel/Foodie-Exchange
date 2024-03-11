@@ -17,6 +17,7 @@
     "hamburger-react": "^2.5.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",
+    "moment": "^2.30.1",
     "preline": "^2.0.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

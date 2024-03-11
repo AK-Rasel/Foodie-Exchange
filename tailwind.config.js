@@ -12,7 +12,7 @@ export default {
         cinzel: ['"Cinzel"', "serif"],
       },
       colors: {
-        "custom-yellow": "#D99904",
+        "custom-red": "#EB3007",
         "custom-naveBlue": "#111827",
         "custom-naveBlueLow": "#1F2937",
       },

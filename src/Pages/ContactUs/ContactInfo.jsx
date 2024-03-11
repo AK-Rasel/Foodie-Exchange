@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const ContactInfo = ({ subInfo, infoIcon, infoTagline, subInfo2 }) => {
   return (
     <div>
-      <div className="bg-custom-yellow flex justify-center py-3 rounded-bl-lg rounded-br-lg shadow-lg">
+      <div className="bg-custom-red flex justify-center py-3 rounded-bl-lg rounded-br-lg shadow-lg">
         <span className="text-xl text-white font-bold">{infoIcon}</span>
       </div>
       <div className="text-center bg-gray-100 px-5 space-y-1 h-40 flex flex-col items-center  justify-center mx-6">

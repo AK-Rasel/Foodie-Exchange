@@ -128,7 +128,7 @@ const ContactUs = () => {
               <button
                 type="submit"
                 disabled={!verify}
-                className=" bg-custom-yellow w-40 justify-center items-center gap-2 p-3 text-white font-semibold disabled:opacity-50 flex"
+                className=" bg-custom-red w-40 justify-center items-center gap-2 p-3 text-white font-semibold disabled:opacity-50 flex"
               >
                 Send Message
                 <span>

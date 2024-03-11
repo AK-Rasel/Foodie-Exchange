@@ -15,7 +15,7 @@ const OurPromise = () => {
               />
             </div>
             <div className="lg:col-span-4 space-y-4 text-center lg:text-start">
-              <h2 className="font-poppins text-xl font-semibold text-custom-yellow">
+              <h2 className="font-poppins text-xl font-semibold text-custom-red">
                 OUR FOOD PROMISE...
               </h2>
               <p className="font-poppins text-custom-naveBlue  font-extrabold  lg:text-6xl">
@@ -25,7 +25,7 @@ const OurPromise = () => {
                 Bold fiery flavours are our style. We’re here to bring a new
                 sizzle to the face of fast-casual dining.
               </p>
-              <div className="flex gap-12 text-custom-yellow">
+              <div className="flex gap-12 text-custom-red">
                 <div className="flex-col text-center flex">
                   <span className="font-poppins font-bold text-4xl">50+</span>
                   <span className="font-poppins text-custom-naveBlue  font-semibold">

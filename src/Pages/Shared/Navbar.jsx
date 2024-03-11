@@ -2,10 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuthContext from "../../Hooks/useAuthContext";
 import { useState, useEffect, useRef } from "react";
 import useCarts from "../../Hooks/useCarts";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
-  const admin = true;
-  // const admin=false
+  const [isAdmin] = useAdmin();
+
+  // const isAdmin = true;
+
   const { user, logOut } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -50,21 +53,13 @@ const Navbar = () => {
       >
         Contact Us
       </Link>
-      {admin ? (
-        <Link
-          to="dashboard/admin_home"
-          className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
-        >
-          Dashboard
-        </Link>
-      ) : (
-        <Link
-          to="dashboard/user_home"
-          className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
-        >
-          Dashboard
-        </Link>
-      )}
+      {/* <Link
+        to="dashboard"
+        className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
+      >
+        Dashboard
+      </Link> */}
+
       <Link
         to="/our_menu"
         className="font-medium text-white hover:text-gray-400 sm:py-6  dark:hover:text-white"
@@ -165,7 +160,7 @@ const Navbar = () => {
             {user && isOpen && (
               <div
                 ref={menuRef}
-                className="absolute border border-custom-yellow top-12 right-8 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 text-custom-naveBlue"
+                className="absolute border border-custom-red top-12 right-8 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 text-custom-naveBlue"
               >
                 <div className="px-4 py-3  text-sm text-gray-900">
                   <div className="uppercase  font-poppins">
@@ -173,18 +168,33 @@ const Navbar = () => {
                   </div>
                   <div className="font-medium truncate">{user?.email}</div>
                 </div>
-                <hr className=" border-custom-yellow border-t-2 w-full" />
+                <hr className=" border-custom-red border-t-2 w-full" />
                 <ul
                   className="py-2 text-sm text-gray-700 a"
                   aria-labelledby="dropdownUserAvatarButton"
                 >
                   <li>
-                    <Link
+                    {/* <Link
                       to="/dashboard/user_home"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Dashboard
-                    </Link>
+                    </Link> */}
+                    {isAdmin ? (
+                      <Link
+                        to="dashboard/admin_home"
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Dashboard
+                      </Link>
+                    ) : (
+                      <Link
+                        to="dashboard/user_home"
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Dashboard
+                      </Link>
+                    )}
                   </li>
                   <li className="px-4 group cursor-pointer  flex py-2 relative hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                     Cart

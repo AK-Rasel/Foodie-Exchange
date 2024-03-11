@@ -33,7 +33,7 @@ const Feature = () => {
                   quasi. Eaque repellat recusandae ad laudantium tempore
                   consequatur consequuntur omnis ullam maxime tenetur.
                 </p>
-                <button className="btn bg-custom-yellow border-none text-lg text-white">
+                <button className="btn bg-custom-red border-none text-lg text-white">
                   Read More
                 </button>
               </div>

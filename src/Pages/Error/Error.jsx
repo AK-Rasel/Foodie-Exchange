@@ -10,7 +10,7 @@ const Error = () => {
         <img className="w-[650px]" src={error} alt="404" />
         <Link
           to="/"
-          className=" bg-custom-yellow w-40 justify-center items-center gap-2 p-3 text-white font-semibold disabled:opacity-50 flex"
+          className=" bg-custom-red w-40 justify-center items-center gap-2 p-3 text-white font-semibold disabled:opacity-50 flex"
         >
           Go Home
           <span>

@@ -39,7 +39,11 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err.message);
-        toast.error(err.message);
+        if (err.code === "auth/invalid-credential") {
+          toast.error("Password Incorrect Enter the correct password");
+        } else {
+          toast.error(err.message);
+        }
       });
   };
   return (
@@ -104,6 +108,7 @@ const Login = () => {
                   </label>
                   <input
                     type={viewPassword}
+                    value="Zxcvbnm!1"
                     placeholder="password"
                     className={
                       !errors.password?.message

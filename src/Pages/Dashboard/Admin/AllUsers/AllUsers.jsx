@@ -40,6 +40,36 @@ const AllUsers = () => {
       }
     });
   };
+  const rollHandler = (id) => {
+    Swal.fire({
+      title: "Are you sure Make Admin ?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Admin!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosProtect
+          .patch(`/roll_set/${id}`)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.modifiedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "User Admin",
+                text: "User has been Admin.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      }
+    });
+  };
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
@@ -107,6 +137,9 @@ const AllUsers = () => {
             <th scope="col" className="px-6 py-3">
               Action
             </th>
+            <th scope="col" className="px-6 py-3">
+              Make Roll
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -134,7 +167,7 @@ const AllUsers = () => {
                 {user?.name}
               </th>
               <td className="px-6 py-4">{user?.email}</td>
-              <td className="px-6 py-4">{user?.role}</td>
+              <td className="px-6 py-4">{user?.roll}</td>
               <td className="px-6 py-4">{user?.gender}</td>
               <td className="px-6 py-4">
                 <button
@@ -143,6 +176,27 @@ const AllUsers = () => {
                 >
                   Delete
                 </button>
+              </td>
+              <td className="px-6 py-4">
+                {user?.roll === "admin" ? (
+                  <button
+                    disabled
+                    onClick={() => rollHandler(user?._id)}
+                    className={
+                      user.roll === "admin" &&
+                      "font-medium text-custom-red disabled:text-yellow-200 dark:text-custom-red cursor-pointer "
+                    }
+                  >
+                    Admin
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => rollHandler(user?._id)}
+                    className="font-medium text-blue-600 cursor-pointer dark:text-blue-500 hover:underline"
+                  >
+                    Admin
+                  </button>
+                )}
               </td>
             </tr>
           ))}

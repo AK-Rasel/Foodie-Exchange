@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 const HeadTitle = ({ borderWhite, titleHead, titleMain }) => {
   return (
     <div className="font-poppins text-center space-y-6 my-14">
-      <p className="font-poppins text-lg font-semibold text-custom-yellow leading-3  ">
+      <p className="font-poppins text-lg font-semibold text-custom-red leading-3  ">
         --{titleHead}--
       </p>
       <hr

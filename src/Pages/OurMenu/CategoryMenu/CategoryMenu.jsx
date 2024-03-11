@@ -36,7 +36,7 @@
 //               />
 //             ))}
 //           </div>
-//           <button className="btn  bg-custom-yellow text-white mb-10">
+//           <button className="btn  bg-custom-red text-white mb-10">
 //             Shoe Moe
 //           </button>
 //         </div>
@@ -88,7 +88,7 @@ const CategoryMenu = ({
           {mainTitale && (
             <Link
               to={`/our_shop/${mainTitale}`}
-              className="text-end my-10 hover:text-custom-yellow hover:underline "
+              className="text-end my-10 hover:text-custom-red hover:underline "
             >
               Show All
             </Link>
@@ -110,7 +110,7 @@ const CategoryMenu = ({
           </div>
           {items.length > 6 && (
             <button
-              className="btn bg-custom-yellow text-white mb-10 hover:bg-custom-naveBlue"
+              className="btn bg-custom-red text-white mb-10 hover:bg-custom-naveBlue"
               onClick={() => setShowMore(!showMore)}
             >
               {showMore ? "Show Less" : "Show More"}

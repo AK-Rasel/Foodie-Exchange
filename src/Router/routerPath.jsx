@@ -20,6 +20,8 @@ import AddItem from "../Pages/Dashboard/Admin/Add Item/AddItem";
 import ManageItems from "../Pages/Dashboard/Admin/ManageItems/ManageItems";
 import ManageBookings from "../Pages/Dashboard/Admin/ManageBookings/ManageBookings";
 import AllUsers from "../Pages/Dashboard/Admin/AllUsers/AllUsers";
+import AdminRouter from "./AdminRouter";
+import UpdateBooking from "../Pages/Update/UpdateBooking";
 
 const routerPath = createBrowserRouter([
   {
@@ -59,53 +61,110 @@ const routerPath = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRouter>
+        <Dashboard />
+      </PrivateRouter>
+    ),
     children: [
       // user
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <PrivateRouter>
+            <Cart />
+          </PrivateRouter>
+        ),
       },
       {
         path: "reviews",
-        element: <Review />,
+        element: (
+          <PrivateRouter>
+            <Review />
+          </PrivateRouter>
+        ),
       },
       {
         path: "reservation",
-        element: <Reservation />,
+        element: (
+          <PrivateRouter>
+            {" "}
+            <Reservation />
+          </PrivateRouter>
+        ),
       },
       {
         path: "user_home",
-        element: <UserHome />,
+        element: (
+          <PrivateRouter>
+            <UserHome />
+          </PrivateRouter>
+        ),
       },
       {
         path: "payment_history",
-        element: <PaymentHistory />,
+        element: (
+          <PrivateRouter>
+            <PaymentHistory />
+          </PrivateRouter>
+        ),
       },
       {
         path: "booking",
-        element: <Booking />,
+        element: (
+          <PrivateRouter>
+            <Booking />
+          </PrivateRouter>
+        ),
       },
-      // Addmin
+      // Admin
       {
         path: "admin_home",
-        element: <AdminHome />,
+        element: (
+          <AdminRouter>
+            <AdminHome />
+          </AdminRouter>
+        ),
       },
       {
         path: "add_item",
-        element: <AddItem />,
+        element: (
+          <AdminRouter>
+            <AddItem />
+          </AdminRouter>
+        ),
       },
       {
         path: "manage_items",
-        element: <ManageItems />,
+        element: (
+          <AdminRouter>
+            <ManageItems />
+          </AdminRouter>
+        ),
       },
       {
         path: "manage_booking",
-        element: <ManageBookings />,
+        element: (
+          <AdminRouter>
+            <ManageBookings />
+          </AdminRouter>
+        ),
+      },
+      {
+        path: "Update_booking/:id",
+        element: (
+          <AdminRouter>
+            <UpdateBooking />
+          </AdminRouter>
+        ),
       },
       {
         path: "all_user",
-        element: <AllUsers />,
+        element: (
+          <AdminRouter>
+            <AllUsers />
+          </AdminRouter>
+        ),
       },
     ],
   },

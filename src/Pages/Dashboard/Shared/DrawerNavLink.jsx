@@ -1,8 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const DrawerNavLink = () => {
-  const isAdmin = true;
-  // const isAdmin = false;
+  const [isAdmin] = useAdmin();
+  // const isAdmin = true;
   return (
     <>
       <div>
@@ -117,7 +118,7 @@ const DrawerNavLink = () => {
           </NavLink>
           <NavLink
             // className={({ isActive }) => {
-            //   isActive ? "text-custom-yellow" : "text-custom-yellow";
+            //   isActive ? "text-custom-red" : "text-custom-red";
             // }}
             className={({ isActive, isPending }) =>
               isPending

@@ -84,7 +84,7 @@ const Cards = ({ items }) => {
           </span> */}
           <button
             onClick={addCartHandle}
-            className="text-white bg-custom-yellow focus:ring-4 focus:outline-none font-medium rounded-lg text-lg px-5 py-2.5 text-center "
+            className="text-white bg-custom-red focus:ring-4 focus:outline-none font-medium rounded-lg text-lg px-5 py-2.5 text-center "
           >
             Add to cart
           </button>

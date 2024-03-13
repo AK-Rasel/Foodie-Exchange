@@ -7,8 +7,10 @@ import { useState } from "react";
 import useAxiosProtect from "../../Hooks/useAxiosProtect";
 import toast from "react-hot-toast";
 import moment from "moment";
+import useAuthContext from "../../Hooks/useAuthContext";
 
 const Reservation = () => {
+  const { user } = useAuthContext();
   const {
     register,
     handleSubmit,
@@ -120,6 +122,7 @@ const Reservation = () => {
             <input
               {...register("name")}
               type="text"
+              value={user?.displayName}
               placeholder="Type here"
               className="input input-bordered w-full "
             />
@@ -147,6 +150,7 @@ const Reservation = () => {
             <input
               {...register("email")}
               type="email"
+              value={user?.email}
               placeholder="Type here"
               className="input input-bordered w-full cursor-pointer"
             />

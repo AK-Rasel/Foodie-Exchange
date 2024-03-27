@@ -9,40 +9,51 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosOpen from "../../../../Hooks/useAxiosOpen";
 
 const ManageItems = () => {
-  const [menu, refetch] = useMenu();
+  // const [menu, refetch] = useMenu();
 
   // data combo
   const axiosOpen = useAxiosOpen();
-  // const {
-  //   data: menu = [],
-  //   refetch,
-  //   isLoading,
-  // } = useQuery({
-  //   queryKey: ["menu"],
-  //   queryFn: async () => {
-  //     const res = await axiosOpen.get(
-  //       `/food_items?page=${page}&limit=${limit}}`
-  //     );
-  //     return res.data;
-  //   },
-  // });
-  // console.log(first)
-  // const limit = 10;
-  // const totalPage = Math.ceil(menu?.data?.total / limit);
-  // const [page, setPage] = useState(1);
+  const {
+    data: menu = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["menu"],
+    queryFn: async () => {
+      const res = await axiosOpen.get(
+        `/food_items?page=${page}&limit=${limit}`
+      );
+      return res.data;
+    },
+  });
+  // console.log(menu.total);
+  const { result: AllMenu = [] } = menu;
+  // console.log(AllMenu);
+  const limit = 10;
+  const totalPage = Math.ceil(menu?.total / limit);
+  // console.log("totall", menu?.total);
+  const [page, setPage] = useState(1);
 
-  // const previousHandel = () => {
-  //   if (page > 1) {
-  //     setPage(page - 1);
-  //   }
-  // };
-  // const nextHandel = () => {
-  //   if (page < totalPage) {
-  //     setPage(page + 1);
-  //   }
-  // };
+  const previousHandel = () => {
+    // console.log(page);
+    // setPage(page - 1);
+    if (page > 1) {
+      setPage(page - 1);
+      refetch();
+    }
+  };
+  const nextHandel = () => {
+    // setPage(page + 1);
+    // console.log(page);
+    // console.log(totalPage);
+    if (page < totalPage) {
+      setPage(page + 1);
+      // console.log(page);
+      refetch();
+    }
+  };
 
-  // console.log(menu);
+  console.log(totalPage);
 
   const axios = useAxiosProtect();
 
@@ -106,7 +117,7 @@ const ManageItems = () => {
     <section className="grid gap-5">
       <div className="text-center flex flex-col md:flex-row gap-2 md:justify-between px-5 mb-4">
         <h2 className="text-2xl uppercase font-bold lg:text-start">
-          Total menu : {menu.length}
+          Total menu : {menu.total}
         </h2>
 
         <button className="btn bg-custom-red text-white font-medium text-lg">
@@ -166,7 +177,7 @@ const ManageItems = () => {
             </tr>
           </thead>
           <tbody>
-            {menu?.map((item) => (
+            {AllMenu?.map((item) => (
               <tr
                 key={item?._id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -222,10 +233,7 @@ const ManageItems = () => {
         </table>
       </div>
       <div className="join justify-center items-center mx-auto w-56">
-        <button
-          //  onClick={previousHandel}
-          className="join-item btn"
-        >
+        <button onClick={previousHandel} className="join-item btn">
           «
         </button>
         {/* {[...Array(totalPage).fill(0)].map((item, index) => {
@@ -244,10 +252,8 @@ const ManageItems = () => {
             </button>
           );
         })} */}
-        <button
-          // onClick={nextHandel}
-          className="join-item btn"
-        >
+        <button className="join-item btn">{page}</button>
+        <button onClick={nextHandel} className="join-item btn">
           »
         </button>
       </div>

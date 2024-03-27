@@ -4,7 +4,10 @@ import HeadTitle from "../../../Utility/Shared/HeadTitle ";
 
 const ChefRecommendation = () => {
   const [menu] = useMenu();
-  const salads = menu.filter((salad) => salad.category === "salad");
+  const salads = Array.isArray(menu)
+    ? menu.filter((salad) => salad.category === "salad")
+    : [];
+  console.log(menu);
   return (
     <section>
       <HeadTitle titleHead={"Should Try"} titleMain={"CHEF RECOMMENDS"} />

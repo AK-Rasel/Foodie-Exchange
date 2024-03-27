@@ -5,9 +5,43 @@ import { useState } from "react";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import useAxiosProtect from "../../../../Hooks/useAxiosProtect";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosOpen from "../../../../Hooks/useAxiosOpen";
 
 const ManageItems = () => {
   const [menu, refetch] = useMenu();
+
+  // data combo
+  const axiosOpen = useAxiosOpen();
+  // const {
+  //   data: menu = [],
+  //   refetch,
+  //   isLoading,
+  // } = useQuery({
+  //   queryKey: ["menu"],
+  //   queryFn: async () => {
+  //     const res = await axiosOpen.get(
+  //       `/food_items?page=${page}&limit=${limit}}`
+  //     );
+  //     return res.data;
+  //   },
+  // });
+  // console.log(first)
+  // const limit = 10;
+  // const totalPage = Math.ceil(menu?.data?.total / limit);
+  // const [page, setPage] = useState(1);
+
+  // const previousHandel = () => {
+  //   if (page > 1) {
+  //     setPage(page - 1);
+  //   }
+  // };
+  // const nextHandel = () => {
+  //   if (page < totalPage) {
+  //     setPage(page + 1);
+  //   }
+  // };
+
   // console.log(menu);
 
   const axios = useAxiosProtect();
@@ -69,7 +103,7 @@ const ManageItems = () => {
   };
 
   return (
-    <section>
+    <section className="grid gap-5">
       <div className="text-center flex flex-col md:flex-row gap-2 md:justify-between px-5 mb-4">
         <h2 className="text-2xl uppercase font-bold lg:text-start">
           Total menu : {menu.length}
@@ -186,6 +220,36 @@ const ManageItems = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="join justify-center items-center mx-auto w-56">
+        <button
+          //  onClick={previousHandel}
+          className="join-item btn"
+        >
+          «
+        </button>
+        {/* {[...Array(totalPage).fill(0)].map((item, index) => {
+          const pageNumber = index + 1;
+          return (
+            <button
+              onClick={() => setPage(pageNumber)}
+              key={pageNumber}
+              className={`${
+                page === pageNumber
+                  ? "join-item btn btn-outline btn-primary "
+                  : "join-item btn btn-outline btn-ghost"
+              }`}
+            >
+              {pageNumber}
+            </button>
+          );
+        })} */}
+        <button
+          // onClick={nextHandel}
+          className="join-item btn"
+        >
+          »
+        </button>
       </div>
     </section>
   );

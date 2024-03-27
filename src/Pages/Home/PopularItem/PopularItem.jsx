@@ -3,9 +3,10 @@ import SmallCard from "../../../Utility/Shared/SmallCard";
 // import categoryImg from "../../assets/home/slide1.jpg";
 
 import useMenu from "../../../Hooks/useMenu";
+// import { useEffect, useState } from "react";
 
 const PopularItem = () => {
-  const [menu] = useMenu();
+  const [AllMenu] = useMenu();
   // const [popular, setPopular] = useState([]);
   // useEffect(() => {
   //   fetch("menu.json")
@@ -18,9 +19,11 @@ const PopularItem = () => {
   //     });
   // }, []);
   // console.log(popular);
-  const popular = menu.filter(
-    (popularItems) => popularItems.category === "popular"
-  );
+  // const { result: popularMenu = [] } = menu;
+  // console.log(popularMenu);
+  const popular = Array.isArray(AllMenu)
+    ? AllMenu?.filter((item) => item.category === "popular")
+    : [];
 
   return (
     <section>
